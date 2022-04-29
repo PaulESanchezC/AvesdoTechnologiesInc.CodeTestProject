@@ -6,4 +6,5 @@ public class OrderStatus
     public static string Processed = "processed";
     public static string Canceled = "canceled";
     public static string Returned = "returned";
+    public string Other { get; set; }
 }
