@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Models.CustomerModels;
+using Models.OrderItemModels;
 using Models.OrderStatusModels;
 using Models.OrderTypeModels;
 using Models.PaymentModels;
@@ -32,6 +33,9 @@ public class OrderBase
 
     [Required]
     public OrderType OrderType { get; set; }
+
+    [Required]
+    public List<OrderItemBase> OrderItems { get; set; }
 
     #endregion
 

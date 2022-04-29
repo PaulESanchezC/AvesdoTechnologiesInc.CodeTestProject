@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <Folder Include="CustomerModels\" />
+    <Folder Include="ProductModels\" />
+    <Folder Include="OrderItemModels\" />
     <Folder Include="OrderTypeModels\" />
     <Folder Include="PaymentModels\" />
     <Folder Include="StoreModels\" />

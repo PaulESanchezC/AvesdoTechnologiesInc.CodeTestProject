@@ -3,6 +3,7 @@ using Configurations.AutoMapperConfigurations;
 using Configurations.ConfigurationsHelper;
 using Configurations.DataAccessConfigurations;
 using Configurations.JsonConfigurations;
+using Configurations.ServicesConfigurations;
 using Configurations.SwaggerGenConfigurations;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +25,8 @@ builder.Services.AddJsonConfigurations();
 builder.Services.AddSwaggerGenConfiguration();
 //Authentication Configurations
 builder.Services.AddAuthenticationConfigurations();
-
+//Services Configurations
+builder.Services.AddServicesConfigurations();
 #endregion
 
 
