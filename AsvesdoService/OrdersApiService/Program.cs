@@ -1,19 +1,41 @@
+using Configurations.AuthorizationConfigurations;
+using Configurations.AutoMapperConfigurations;
+using Configurations.ConfigurationsHelper;
+using Configurations.DataAccessConfigurations;
+using Configurations.JsonConfigurations;
+using Configurations.SwaggerGenConfigurations;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+#region Services
+
+//AutoMapper Configurations
+builder.Services.AddAutoMapperMapConfigurations();
+//Configuration Helper -ProxyConfiguration-
+ProxyConfiguration.Initialize(builder.Configuration);
+//DataAccessConfigurations
+builder.Services.AddDbContextOptions();
+//Json Configurations
+builder.Services.AddJsonConfigurations();
+//SwaggerGen Configurations
+builder.Services.AddSwaggerGenConfiguration();
+//Authentication Configurations
+builder.Services.AddAuthenticationConfigurations();
+
+#endregion
+
+
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+#region Http request Pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/ApiOrderService/swagger.json", "Asvesdo Orders Api Service"));
 }
 
 app.UseHttpsRedirection();
@@ -21,5 +43,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+#endregion
 
 app.Run();
