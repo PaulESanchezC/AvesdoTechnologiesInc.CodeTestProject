@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="CustomerModels\" />
     <Folder Include="EmploymentRoleModels\" />
+    <Folder Include="TaxModels\" />
     <Folder Include="StaffModels\" />
     <Folder Include="ProductModels\" />
     <Folder Include="OrderItemModels\" />
