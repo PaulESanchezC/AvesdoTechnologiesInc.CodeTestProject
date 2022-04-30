@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Models.PreferredPronounsModels;
+using Models.StaffModels;
+using Models.TaxModels;
 
 namespace Models.StoreModels;
 
@@ -8,7 +9,7 @@ public class StoreBase
     #region Public Properties
 
     [Key]
-    public string StoreId { get; set; } = Guid.NewGuid().ToString();
+    public string StoreId { get; set; } = Guid.NewGuid().TinyGuid();
 
     [Required(AllowEmptyStrings = false), MaxLength(200)]
     public string StoreName { get; set; }
@@ -34,13 +35,15 @@ public class StoreBase
     [Required(AllowEmptyStrings = false), MaxLength(20)]
     public string StoreZipCode { get; set; }
 
+    [Required] public List<TaxBase> Tax { get; set; }
+
     #endregion
 
     #region Internal Properties
 
     public DateTime DateCreated { get; set; } = DateTime.Now;
     public bool IsActive { get; set; } = true;
-    public List<Staff> StaffList { get; set; }
+    public List<StaffBase> StaffList { get; set; }
 
     #endregion
 }

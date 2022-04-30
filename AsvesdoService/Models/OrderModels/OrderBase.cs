@@ -13,10 +13,11 @@ public class OrderBase
 {
     #region Public properties
 
-    [Key] public string OrderId { get; set; } = Guid.NewGuid().ToString();
+    [Key]
+    public string OrderId { get; set; } = Guid.NewGuid().ToString();
 
     [Required(AllowEmptyStrings = false)]
-    public OrderStatus OrderStatus { get; set; }
+    public OrderStatusBase OrderStatus { get; set; }
 
     [Required]
     public DateTime OrderDateAndTime { get; set; } = DateTime.Now;
@@ -26,13 +27,12 @@ public class OrderBase
     [ForeignKey(nameof(CustomerId))]
     public CustomerBase Customer { get; set; }
 
-    [Required]
-    public string PaymentId { get; set; }
-    [ForeignKey(nameof(CustomerId))]
-    public PaymentBase Payment { get; set; }
+    public List<PaymentBase> Payments { get; set; }
 
     [Required]
-    public OrderType OrderType { get; set; }
+    public int OrderTypeId { get; set; }
+    [ForeignKey(nameof(OrderTypeId))]
+    public OrderTypeBase OrderType { get; set; }
 
     [Required]
     public List<OrderItemBase> OrderItems { get; set; }

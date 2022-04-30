@@ -19,4 +19,12 @@
 		</PackageReference>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Models\Models.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="FluentApi\" />
+	</ItemGroup>
+
 </Project>

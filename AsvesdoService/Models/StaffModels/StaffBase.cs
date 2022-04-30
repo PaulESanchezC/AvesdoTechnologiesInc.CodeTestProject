@@ -11,7 +11,7 @@ public class StaffBase
     #region Public Properties
 
     [Key]
-    public string StaffId { get; set; } = Guid.NewGuid().ToString();
+    public string StaffId { get; set; } = Guid.NewGuid().TinyGuid();
 
     [Required(AllowEmptyStrings = false), MaxLength(50)]
     public string StaffFirstName { get; set; }
@@ -38,7 +38,7 @@ public class StaffBase
     public string StaffZipCode { get; set; }
 
     [Required(AllowEmptyStrings = false), MaxLength(50)]
-    public PreferredPronoun StaffPreferredPronoun { get; set; }
+    public PreferredPronounBase StaffPreferredPronoun { get; set; }
 
 
     [Required]
@@ -55,7 +55,7 @@ public class StaffBase
     public bool IsActive { get; set; } = true;
 
     [Required]
-    public string EmploymentRoleId { get; set; }
+    public int EmploymentRoleId { get; set; }
     [ForeignKey(nameof(EmploymentRoleId))]
     public EmploymentRoleBase EmploymentRole { get; set; }
 

@@ -9,7 +9,7 @@ where TDto: class
 where TCreate : class
 where TUpdate : class
 {
-    Task<Response<TDto>> GetAllByAsync(Expression<Func<T, bool>>? predicate, CancellationToken cancellationToken, params Expression<Func<T,object>>[] includes);
+    Task<Response<TDto>> GetAllByAsync(Expression<Func<T, bool>>? predicate, Expression<Func<T, object>>? orderBy, CancellationToken cancellationToken, params Expression<Func<T,object>>[] includes);
     Task<Response<TDto>> GetSingleByAsync(Expression<Func<T,bool>> predicate, CancellationToken cancellationToken, params Expression<Func<T,object>>[] includes);
     Task<Response<TDto>> CreateAsync(TCreate objectToCreate, CancellationToken cancellationToken);
     Task<Response<TDto>> UpdateAsync(TUpdate objectToUpdate, CancellationToken cancellationToken);

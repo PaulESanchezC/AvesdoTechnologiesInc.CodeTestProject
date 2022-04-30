@@ -36,7 +36,7 @@ public class CustomerBase
     public string CustomerZipCode { get; set; }
 
     [Required(AllowEmptyStrings = false), MaxLength(50)]
-    public PreferredPronoun CustomerPreferredPronoun { get; set; }
+    public PreferredPronounBase CustomerPreferredPronoun { get; set; }
 
     #endregion
 

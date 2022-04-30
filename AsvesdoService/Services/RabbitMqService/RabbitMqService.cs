@@ -1,19 +1,10 @@
 ﻿using System.Text;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using Models.CouponModels;
-using Models.EmailModels;
-using Models.EmailModels.EmailDataModels;
-using Models.EmailModels.EmailReservationModel;
-using Models.MessageQueueModels.PaymentSuccessMessageModels;
-using Models.MessageQueueModels.ReservationSuccessModels;
 using Models.Options;
-using Models.ReservationModels;
-using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Services.MessageQueueHandlerService;
-using StaticData;
 
 namespace Services.RabbitMqService;
 

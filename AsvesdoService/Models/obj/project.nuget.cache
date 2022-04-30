@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "DCPF78H6aCHvN36ijyrorJkX40zFAziM9eNG0mlUjxmUB2K+VmaI1+60QaHwbnzbFSSC/1RNdqK3lqDMKROqFQ==",
+  "dgSpecHash": "6SvTyTkqyjkBCdLhqD24SJhqY/R/W8ldiPa5LDe1FC1jA8Wo9tDPH0y6BXzUPgcnTCT6zJ7IKBugo3S4LhGqTQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\Models\\Models.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Paulyglot\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.3\\microsoft.entityframeworkcore.abstractions.6.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -881,7 +881,8 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "6.0.3",
-          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.3"
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.3",
+          "Models": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Data.dll": {}
@@ -893,6 +894,9 @@
       "Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Abstractions": "6.0.3"
+        },
         "compile": {
           "bin/placeholder/Models.dll": {}
         },
@@ -904,6 +908,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "AutoMapper": "11.0.0",
+          "Data": "1.0.0",
           "Microsoft.AspNetCore.Hosting.Abstractions": "2.2.0",
           "Microsoft.Extensions.Options": "6.0.0",
           "Models": "1.0.0",

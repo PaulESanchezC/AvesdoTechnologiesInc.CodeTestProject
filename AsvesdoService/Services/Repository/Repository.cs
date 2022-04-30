@@ -19,16 +19,20 @@ public class Repository<T, TDto, TCreate, TUpdate> : IRepository<T, TDto, TCreat
         _mapper = mapper;
     }
 
-    public async Task<Response<TDto>> GetAllByAsync(Expression<Func<T, bool>>? predicate, CancellationToken cancellationToken, params Expression<Func<T, object>>[] includes)
+    public async Task<Response<TDto>> GetAllByAsync(Expression<Func<T, bool>>? predicate, Expression<Func<T, object>>? orderBy, CancellationToken cancellationToken, params Expression<Func<T, object>>[] includes)
     {
         var query = _db.Set<T>().AsQueryable().AsNoTracking();
+
 
         var result = includes.Aggregate(query, (result, data) => result.Include(data));
         if (predicate != null)
             result = result.Where(predicate);
 
+        if (orderBy is not null)
+            result = result.OrderBy(orderBy);
+
         if (!result.Any())
-            return await ResponseSingleBuilderTask(false, 400, "Empty Result", "The operation returned an empty result", null);
+            return await ResponseSingleBuilderTask(false, 404, "Empty Result", "The operation returned an empty result", null);
 
         return await ResponseManyBuilderTask(true,200,"Ok","Ok", await result.ToListAsync(cancellationToken));
     }

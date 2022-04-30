@@ -7,7 +7,7 @@ public class ProductBase
     #region Public properties
 
     [Key]
-    public string ProductId { get; set; } = Guid.NewGuid().ToString();
+    public string ProductId { get; set; } = Guid.NewGuid().TinyGuid();
 
     [Required(AllowEmptyStrings = false), MaxLength(100)]
     public string ProductName { get; set; }
@@ -15,7 +15,7 @@ public class ProductBase
     [Required(AllowEmptyStrings = false), MaxLength(240)]
     public string Description { get; set; }
 
-    [Required,Range(0.50,Double.MaxValue)]
+    [Required,Range(0.50,double.MaxValue)]
     public double Price { get; set; }
 
     #endregion

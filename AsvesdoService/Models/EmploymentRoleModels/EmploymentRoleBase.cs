@@ -7,7 +7,7 @@ public class EmploymentRoleBase
     #region Public Properties
 
     [Key]
-    public string EmploymentRoleId { get; set; }
+    public int EmploymentRoleId { get; set; }
 
     [Required(AllowEmptyStrings = false), MaxLength(50)]
     public string EmploymentRoleName { get; set; }

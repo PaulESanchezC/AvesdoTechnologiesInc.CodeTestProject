@@ -13,10 +13,12 @@
     <Folder Include="StaffModels\" />
     <Folder Include="ProductModels\" />
     <Folder Include="OrderItemModels\" />
-    <Folder Include="OrderTypeModels\" />
     <Folder Include="PaymentModels\" />
     <Folder Include="StoreModels\" />
-    <Folder Include="OrderModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="6.0.3" />
   </ItemGroup>
 
 </Project>
