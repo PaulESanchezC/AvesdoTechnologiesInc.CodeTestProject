@@ -13,7 +13,8 @@
           "Microsoft.AspNetCore.Hosting.Abstractions": "2.2.0",
           "Microsoft.Extensions.Options": "6.0.0",
           "Models": "1.0.0",
-          "RabbitMQ.Client": "6.2.4"
+          "RabbitMQ.Client": "6.2.4",
+          "StaticData": "1.0.0"
         },
         "runtime": {
           "Services.dll": {}
@@ -586,6 +587,14 @@
         "runtime": {
           "Models.dll": {}
         }
+      },
+      "StaticData/1.0.0": {
+        "dependencies": {
+          "Models": "1.0.0"
+        },
+        "runtime": {
+          "StaticData.dll": {}
+        }
       }
     }
   },
@@ -965,6 +974,11 @@
       "sha512": ""
     },
     "Models/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "StaticData/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -1,7 +1,10 @@
-﻿namespace Services.RabbitMqService;
+﻿using Models.MessageQueueModels;
+
+namespace Services.RabbitMqService;
 
 public interface IRabbitMqService
 {
-    void SendProductionQueueMessage();
-    void SendSalesQueueMessage();
+    void CreateConnection();
+    bool ConnectionExists();
+    void SendSalesQueueMessage(SalesQueueMessage message);
 }
