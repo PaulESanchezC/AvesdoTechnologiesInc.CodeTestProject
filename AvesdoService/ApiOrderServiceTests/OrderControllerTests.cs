@@ -17,6 +17,8 @@ public class OrderControllerTests
     private Response<OrderDto> ExpectedResponse;
     private Response<OrderDto> EmptyResponse;
 
+    //TODO: I won't cover every aspect and the whole controller given that this is a test project, and testing wasn't required.
+    // I will take the time instead to test other parts of the Api Service
     [SetUp]
     public void Setup()
     {
@@ -426,6 +428,7 @@ public class OrderControllerTests
             It.IsAny<CancellationToken>(),
             It.IsAny<Expression<Func<Order, object>>[]>()), Times.Once);
     }
+
     #endregion
 
 }
