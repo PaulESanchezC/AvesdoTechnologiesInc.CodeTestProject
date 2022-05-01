@@ -4,6 +4,7 @@ using Models.OrderItemModels;
 using Models.OrderModels;
 using Models.OrderStatusesModels;
 using Models.PaymentModels;
+using Models.ProductModels;
 using Models.StoreModels;
 using Models.TaxModels;
 
@@ -28,5 +29,7 @@ public class AutoMapperOptionsConfigurations : Profile
         CreateMap<Store, StoreDto>().ReverseMap();
 
         CreateMap<OrderStatus, OrderStatusDto>().ReverseMap();
+
+        CreateMap<Product, ProductDto>().ReverseMap();
     }
 }

@@ -1,15 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Models.EmploymentRoleModels;
+﻿using Models.EmploymentRoleModels;
 using Models.StoreModels;
 
 namespace Models.StaffModels;
 
-public class StaffBase
+public class StaffDto
+
 {
     #region Public Properties
 
-    public string StaffId { get; set; } = Guid.NewGuid().TinyGuid();
+    public string StaffId { get; set; }
     public string StaffFirstName { get; set; }
     public string StaffLastName { get; set; }
     public string StaffPhoneNumber { get; set; }

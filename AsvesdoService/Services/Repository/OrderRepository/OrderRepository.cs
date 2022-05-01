@@ -11,14 +11,13 @@ using Models.ResponseModels;
 
 namespace Services.Repository.OrderRepository;
 
-public class OrderRepository : Repository<Order, OrderDto, OrderCreateDto>, IOrderRepository
+public class OrderRepository : Repository<Order, OrderDto, OrderCreateDto, OrderUpdateDto>, IOrderRepository
 {
     private readonly ApplicationDbContext _db;
-    private readonly IMapper _mapper;
+    
     public OrderRepository(ApplicationDbContext db, IMapper mapper) : base(db, mapper)
     {
         _db = db;
-        _mapper = mapper;
     }
 
 

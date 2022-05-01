@@ -1,8 +1,8 @@
-using Configurations.AuthorizationConfigurations;
 using Configurations.AutoMapperConfigurations;
 using Configurations.ConfigurationsHelper;
 using Configurations.DataAccessConfigurations;
 using Configurations.JsonConfigurations;
+using Configurations.JwtConfiguration;
 using Configurations.ServicesConfigurations;
 using Configurations.SwaggerGenConfigurations;
 
@@ -23,10 +23,10 @@ builder.Services.AddDbContextOptions();
 builder.Services.AddJsonConfigurations();
 //SwaggerGen Configurations
 builder.Services.AddSwaggerGenConfiguration();
-//Authentication Configurations
-builder.Services.AddAuthenticationConfigurations();
 //Services Configurations
 builder.Services.AddServicesConfigurations();
+//Jwt Configurations 
+builder.Services.AddJwtConfiguration();
 #endregion
 
 

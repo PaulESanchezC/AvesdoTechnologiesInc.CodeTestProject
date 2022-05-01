@@ -22,6 +22,12 @@ public class Tax
     [Required, MaxLength(20)]
     public string TaxAcronym { get; set; }
 
+    [Required, MaxLength(20)]
+    public string StateOrProvinceAcronym { get; set; }
+
+    [Required(AllowEmptyStrings = false), MaxLength(100)]
+    public string StateOrProvinceName { get; set; }
+
     #endregion
 
     #region Internal Properties

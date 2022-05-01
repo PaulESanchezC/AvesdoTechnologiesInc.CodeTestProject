@@ -9,7 +9,8 @@ public class TaxDto
     public string TaxPercentageString { get; set; }
     public string TaxDescription { get; set; }
     public string TaxAcronym { get; set; }
-
+    public string StateOrProvinceAcronym { get; set; }
+    public string StateOrProvinceName { get; set; }
 
     #endregion
 }

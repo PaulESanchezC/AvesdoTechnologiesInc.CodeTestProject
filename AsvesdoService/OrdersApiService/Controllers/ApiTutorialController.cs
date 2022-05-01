@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Models.TutorialModels;
 using Services.Repository.OrderRepository;
+using Services.TutorialServices;
 
 namespace ApiOrderService.Controllers
 {
@@ -8,11 +10,11 @@ namespace ApiOrderService.Controllers
     [ApiController]
     public class ApiTutorialController : ControllerBase
     {
-        #region Dependencies, Constructor
-        public ApiTutorialController()
-        { }
-        #endregion
-
+        private readonly ITutorialService _tutorial;
+        public ApiTutorialController(ITutorialService tutorial)
+        {
+            _tutorial = tutorial;
+        }
 
         [HttpGet("GetTheTutorialInformationGuide")]
         public async Task<IActionResult> GetTheTutorialInformationGuide()
@@ -44,15 +46,17 @@ namespace ApiOrderService.Controllers
 
 
         [HttpPost("OrderCreateDto:Helper/")]
-        public async Task<IActionResult> OrderCreateDtoHelper()
+        public async Task<IActionResult> OrderCreateDtoHelper([FromBody] OrderCreateDtoHelper orderCreateDtoHelper, CancellationToken cancellationToken)
         {
-            return Ok();
+            var request = await _tutorial.GenerateOrderCreateDtoAsync(orderCreateDtoHelper.storeId,
+                orderCreateDtoHelper.customerId, cancellationToken, orderCreateDtoHelper.TutorialOrderCreateDto.ToArray());
+            return Ok(request);
         }
 
         [HttpGet("JwtTokenProvider")]
         public async Task<IActionResult> JwtTokenProvider()
         {
-            var token = "Get Token from service";
+            var token = await _tutorial.ProvideJwtToken();
             return Ok(token);
         }
 

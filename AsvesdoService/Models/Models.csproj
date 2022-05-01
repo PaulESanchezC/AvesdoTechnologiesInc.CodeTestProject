@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="EnumModels\" />
+    <Folder Include="TutorialModels\" />
   </ItemGroup>
 
 </Project>

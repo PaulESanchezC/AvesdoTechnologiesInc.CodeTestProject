@@ -19,7 +19,7 @@ public class TinyRepository<T,TDto> : ITinyRepository<T,TDto>
         _db = db;
     }
 
-    public async Task<Response<TDto>> GetAllByAsync(Expression<Func<T, bool>>? predicate, Expression<Func<T, object>>? orderBy, CancellationToken cancellationToken,
+    public async Task<Response<TDto>> GetAllByAsync(Expression<Func<T, bool>>? predicate, Expression<Func<T, object>>? orderBy, bool descending ,CancellationToken cancellationToken,
         params Expression<Func<T, object>>[] includes)
     {
         var query = _db.Set<T>().AsQueryable().AsNoTracking();
@@ -29,7 +29,7 @@ public class TinyRepository<T,TDto> : ITinyRepository<T,TDto>
             result = result.Where(predicate);
 
         if (orderBy is not null)
-            result = result.OrderBy(orderBy);
+            result = descending ? result.OrderByDescending(orderBy) : result.OrderBy(orderBy);
 
         if (!result.Any())
             return await ResponseSingleBuilderTask(false, 404, "Empty Result", "The operation returned an empty result", null);

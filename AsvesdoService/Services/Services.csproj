@@ -19,8 +19,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="TinyRepository\" />
+    <Folder Include="Repository\StaffRepository\" />
+    <Folder Include="TinyRepository\EmploymentRoleTinyRepository\" />
+    <Folder Include="TutorialServices\" />
     <Folder Include="Repository\OrderRepository\" />
+    <Folder Include="TinyRepository\TaxTinyRepository\" />
+    <Folder Include="TinyRepository\ProductsTinyRepository\" />
   </ItemGroup>
 
 </Project>
