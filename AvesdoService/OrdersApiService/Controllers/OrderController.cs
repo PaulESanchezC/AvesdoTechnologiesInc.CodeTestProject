@@ -113,7 +113,8 @@ public class OrderController : ControllerBase
             predicate: order => order.OrderId==orderId,
             cancellationToken: cancellationToken,
             //Entities EfCore Includes
-            include => include.OrderStatuses.OrderBy(status => status.StatusDate), include => include.Customer, include => include.Payments,
+            include => include.OrderStatuses.OrderBy(status => status.StatusDate),
+            include => include.Customer, include => include.Payments,
             include => include.Store, include => include.OrderItems);
 
         return StatusCode(request.StatusCode, request);

@@ -31,7 +31,7 @@ public class Repository<T, TDto, TCreate, TUpdate> : IRepository<T, TDto, TCreat
             result = result.OrderBy(orderBy);
 
         if (!result.Any())
-            return await ResponseSingleBuilderTask(false, 404, "Empty Result", "The operation returned an empty result", null);
+            return await ResponseSingleBuilderTask(false, 400, "Empty Result", "The operation returned an empty result", null);
 
         return await ResponseManyBuilderTask(true, 200, "Ok", "Ok", await result.ToListAsync(cancellationToken));
     }

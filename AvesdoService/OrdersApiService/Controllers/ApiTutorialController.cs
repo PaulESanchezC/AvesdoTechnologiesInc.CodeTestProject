@@ -3,22 +3,22 @@ using Microsoft.AspNetCore.Mvc;
 using Models.TutorialModels;
 using Services.TutorialServices;
 
-namespace ApiOrderService.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ApiTutorialController : ControllerBase
-    {
-        private readonly ITutorialService _tutorial;
-        public ApiTutorialController(ITutorialService tutorial)
-        {
-            _tutorial = tutorial;
-        }
+namespace ApiOrderService.Controllers;
 
-        [HttpGet("GetTheTutorialInformationGuide")]
-        public IActionResult GetTheTutorialInformationGuide()
-        {
-            return Ok(@"
+[Route("api/[controller]")]
+[ApiController]
+public class ApiTutorialController : ControllerBase
+{
+    private readonly ITutorialService _tutorial;
+    public ApiTutorialController(ITutorialService tutorial)
+    {
+        _tutorial=tutorial;
+    }
+
+    [HttpGet("GetTheTutorialInformationGuide")]
+    public IActionResult GetTheTutorialInformationGuide()
+    {
+        return Ok(@"
         Hi, welcome to this tutorial.
         These Tutorial Endpoints will provide you with most data required to allow you ease of use of this services.
 
@@ -53,22 +53,22 @@ namespace ApiOrderService.Controllers
         Thank you for your time.
         Developed by Paul E. Sanchez C.
         ");
-        }
+    }
 
-        [HttpGet("JwtTokenProvider")]
-        public async Task<IActionResult> JwtTokenProvider()
-        {
-            var token = await _tutorial.ProvideJwtToken();
-            return Ok(token);
-        }
+    [HttpGet("JwtTokenProvider")]
+    public async Task<IActionResult> JwtTokenProvider()
+    {
+        var token = await _tutorial.ProvideJwtToken();
+        return Ok(token);
+    }
 
-        [HttpGet("QuickOrderBody")]
-        public async Task<IActionResult> OrderCreateDto(CancellationToken cancellationToken)
-        {
-            var request = await _tutorial.GenerateOrderCreateDtoAsync(
-                "ZOVeglC_pUm23GPfH972qA", "843e5834-b805-4b25-817c-349bb37f0149",
-                cancellationToken,new TutorialOrderCreateDto[2]
-                {
+    [HttpGet("QuickOrderBody")]
+    public async Task<IActionResult> OrderCreateDto(CancellationToken cancellationToken)
+    {
+        var request = await _tutorial.GenerateOrderCreateDtoAsync(
+            "ZOVeglC_pUm23GPfH972qA", "843e5834-b805-4b25-817c-349bb37f0149",
+            cancellationToken, new TutorialOrderCreateDto[2]
+            {
                     new()
                     {
                         ProductId = "MoeljLg-5EO8NWZktzh8Mg",
@@ -79,31 +79,32 @@ namespace ApiOrderService.Controllers
                         ProductId = "ijh_R4Pm20KKAeVu2S8PYQ",
                         Quantity = 1
                     }
-                });
-            return Ok(request);
+            });
+        return Ok(request);
+    }
+
+    [Authorize]
+    [HttpPost("OrderCreateDto:Helper/")]
+    public async Task<IActionResult> OrderCreateDtoHelper([FromBody] OrderCreateDtoHelper orderCreateDtoHelper, CancellationToken cancellationToken)
+    {
+        var (isValid, errorDictionary)=await _tutorial.ValidateModelOrderCreateDtoHelper(orderCreateDtoHelper);
+        if (!isValid)
+        {
+            foreach (var (key, value) in errorDictionary)
+                ModelState.AddModelError(key, value);
+            return BadRequest(ModelState);
         }
 
-        [Authorize]
-        [HttpPost("OrderCreateDto:Helper/")]
-        public async Task<IActionResult> OrderCreateDtoHelper([FromBody] OrderCreateDtoHelper orderCreateDtoHelper, CancellationToken cancellationToken)
-        {
-            var (isValid, errorDictionary) = await _tutorial.ValidateModelOrderCreateDtoHelper(orderCreateDtoHelper);
-            if (!isValid)
-            {
-                foreach (var (key,value) in errorDictionary)
-                    ModelState.AddModelError(key,value);
-                return BadRequest(ModelState);
-            }
+        var request = await _tutorial.GenerateOrderCreateDtoAsync(orderCreateDtoHelper.storeId,
+            orderCreateDtoHelper.customerId, cancellationToken, orderCreateDtoHelper.TutorialOrderCreateDto.ToArray());
+        return Ok(request);
+    }
 
-            var request = await _tutorial.GenerateOrderCreateDtoAsync(orderCreateDtoHelper.storeId,
-                orderCreateDtoHelper.customerId, cancellationToken, orderCreateDtoHelper.TutorialOrderCreateDto.ToArray());
-            return Ok(request);
-        }
-
-        [HttpGet("CodeInformation")]
-        public IActionResult CodeInformation()
-        {
-            return Ok(@"
+    [HttpGet("CodeInformation")]
+    public IActionResult CodeInformation()
+    {
+        return Ok(
+            @"
         'This Api was developed with:'
             Net 6 / .Net Core 6
             Entity framework core 6, Code-first
@@ -142,7 +143,7 @@ namespace ApiOrderService.Controllers
 
         Thank you for your time.
         'Developed by Paul E. Sanchez C.'
-");
-        }
+                ");
     }
 }
+
