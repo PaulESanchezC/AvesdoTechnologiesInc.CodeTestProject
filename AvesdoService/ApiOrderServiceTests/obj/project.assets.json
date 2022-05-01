@@ -7627,11 +7627,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\ApiOrderServiceTests\\ApiOrderServiceTests.csproj",
+      "projectUniqueName": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\ApiOrderServiceTests\\ApiOrderServiceTests.csproj",
       "projectName": "ApiOrderServiceTests",
-      "projectPath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\ApiOrderServiceTests\\ApiOrderServiceTests.csproj",
+      "projectPath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\ApiOrderServiceTests\\ApiOrderServiceTests.csproj",
       "packagesPath": "C:\\Users\\Paulyglot\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\ApiOrderServiceTests\\obj\\",
+      "outputPath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\ApiOrderServiceTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Paulyglot\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -7648,14 +7648,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\Models\\Models.csproj": {
-              "projectPath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\Models\\Models.csproj"
+            "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\Models\\Models.csproj": {
+              "projectPath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\Models\\Models.csproj"
             },
-            "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\OrdersApiService\\ApiOrderService.csproj": {
-              "projectPath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\OrdersApiService\\ApiOrderService.csproj"
+            "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\OrdersApiService\\ApiOrderService.csproj": {
+              "projectPath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\OrdersApiService\\ApiOrderService.csproj"
             },
-            "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\Services\\Services.csproj": {
-              "projectPath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\Services\\Services.csproj"
+            "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\Services\\Services.csproj": {
+              "projectPath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\Services\\Services.csproj"
             }
           }
         }

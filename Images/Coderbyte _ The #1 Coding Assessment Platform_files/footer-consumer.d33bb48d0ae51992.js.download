@@ -1,0 +1,38 @@
+$(document).ready(function(){Vue.component('footer-consumer',{data:function(){return{}},template:`<div class="footer">
+      <div class="inner-section">
+        <ul class="footer-nav">
+          <li>
+            <a href="/about">About</a>
+          </li>
+          <li>
+            <a href="/challenges">Challenges</a>
+          </li>
+          <li>
+            <a href="/privacy">Privacy</a>
+          </li>
+          <li>
+            <a href="/terms">Terms</a>
+          </li>
+          <li>
+            <a href="/contact">Contact</a>
+          </li>
+          <li>
+            <a href="/organizations">For Employers</a>
+          </li>
+        </ul>
+        <div class="footer-copy">
+          <div class="sm-row">
+            <a href="https://www.facebook.com/coderbyte" target="_blank">
+              <img src="https://coderbytestaticimages.s3.amazonaws.com/consumer-v2/homepage/facebook.png" srcset="https://coderbytestaticimages.s3.amazonaws.com/consumer-v2/homepage/facebook@2x.png 2x, https://coderbytestaticimages.s3.amazonaws.com/consumer-v2/homepage/facebook@3x.png 3x" />
+            </a>
+            <a href="https://twitter.com/coderbyte" target="_blank">
+              <img src="https://coderbytestaticimages.s3.amazonaws.com/consumer-v2/homepage/twitter.png" srcset="https://coderbytestaticimages.s3.amazonaws.com/consumer-v2/homepage/twitter@2x.png 2x, https://coderbytestaticimages.s3.amazonaws.com/consumer-v2/homepage/twitter@3x.png 3x" />
+            </a>
+            <a href="https://www.linkedin.com/company/coderbyte/" target="_blank">
+              <img src="https://coderbytestaticimages.s3.amazonaws.com/consumer-v2/homepage/linkedin.png" srcset="https://coderbytestaticimages.s3.amazonaws.com/consumer-v2/homepage/linkedin@2x.png 2x, https://coderbytestaticimages.s3.amazonaws.com/consumer-v2/homepage/linkedin@3x.png 3x" />
+            </a>
+          </div>
+          <div class="copyright">&copy; 2022 Coderbyte</div>
+        </div>
+      </div>
+    </div>`})})

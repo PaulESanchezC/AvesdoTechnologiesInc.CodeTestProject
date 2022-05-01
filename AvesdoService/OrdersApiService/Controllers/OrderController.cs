@@ -1,15 +1,9 @@
 ﻿using System.Globalization;
 using System.Web;
-using Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.EntityFrameworkCore;
 using Models.EnumModels;
 using Models.OrderModels;
-using Models.ResponseModels;
-using Models.StoreModels;
-using Newtonsoft.Json;
 using Services.Repository.OrderRepository;
 
 namespace ApiOrderService.Controllers;
@@ -155,7 +149,7 @@ public class OrderController : ControllerBase
         return Ok(PaymentMethodsTypes.PaymentMethodsList);
     }
 
-    //[Authorize]
+    [Authorize]
     [HttpPost("MakeAnOrder")]
     public async Task<IActionResult> MakeAnOrder([FromBody] OrderCreateDto orderToCreate, CancellationToken cancellationToken)
     {

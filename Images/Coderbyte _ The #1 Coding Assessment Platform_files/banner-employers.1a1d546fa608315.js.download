@@ -1,0 +1,3 @@
+$(document).ready(function(){Vue.component('banner-employers',{data:function(){return{}},template:`<div class="top-banner">
+      Hiring technical talent? Check out <a href="/organizations?utm_campaign=Consumer%20-%20coderbyte.com&utm_source=blue_top_bar" target="_blank">Coderbyte for Employers</a>
+    </div>`})})

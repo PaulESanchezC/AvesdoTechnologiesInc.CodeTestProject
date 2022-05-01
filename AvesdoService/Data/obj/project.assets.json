@@ -1922,11 +1922,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\Data\\Data.csproj",
+      "projectUniqueName": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\Data\\Data.csproj",
       "projectName": "Data",
-      "projectPath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\Data\\Data.csproj",
+      "projectPath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\Data\\Data.csproj",
       "packagesPath": "C:\\Users\\Paulyglot\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\Data\\obj\\",
+      "outputPath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Paulyglot\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1943,8 +1943,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\Models\\Models.csproj": {
-              "projectPath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\Models\\Models.csproj"
+            "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\Models\\Models.csproj": {
+              "projectPath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\Models\\Models.csproj"
             }
           }
         }

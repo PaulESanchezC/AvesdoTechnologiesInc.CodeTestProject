@@ -1,0 +1,94 @@
+$(document).ready(function(){Vue.component('main-nav',{props:['subtitle'],data:function(){return{authObject:window.__authObject,showMobileNav:!1,mobileNavOpts:{dragStart:!1,dragEnd:!1},loggedIn:!1,imagePath:'https://coderbytestaticimages.s3.amazonaws.com/consumer-v2/nav',}},created:function(){var that=this;if(this.authObject&&this.authObject.username){this.loggedIn=!0}},mounted:function(){stickybits('#mainNav',{useStickyClasses:!0,stickyBitStickyOffset:-70})},methods:{triggerMobileNav:function(){this.showMobileNav=!0},startMobileDrag:function(e){const touches=e.touches[0]
+if(touches){this.mobileNavOpts.dragStart=touches.clientX}},midMobileDrag:function(e){if(this.mobileNavOpts.dragStart!==!1){const touches=e.touches[0]
+if(!touches)return
+this.mobileNavOpts.dragEnd=touches.clientX}},endMobileDrag:function(e){if(this.mobileNavOpts.dragStart!==!1&&this.mobileNavOpts.dragEnd!==!1&&this.mobileNavOpts.dragStart<this.mobileNavOpts.dragEnd){this.showMobileNav=!1}
+this.resetMobileDrag()},cancelMobileDrag:function(){this.resetMobileDrag()},resetMobileDrag:function(){this.mobileNavOpts.dragStart=!1
+this.mobileNavOpts.dragEnd=!1},imageSrc:function(filename){if(filename==='coderbyte_logo_digital_multi_light.png'&&window.__authObject&&(window.__authObject.isCandidate||window.__authObject.isAdmin)){return'https://coderbytestaticimages.s3.amazonaws.com/dashboard-v3/coderbyte_logo_digital_navy.png'}
+return `${this.imagePath}/${filename}`},},template:`<div id="mainNav">
+      <nav class="main-nav-wrap">
+        <a href="/developers">
+          <img v-if="authObject && authObject.assessmentDetails && authObject.assessmentDetails.logo !== ''" class="mainLogoImage" v-bind:src="authObject.assessmentDetails.logo" />
+          <img v-else class="mainLogoImage" :src="imageSrc('coderbyte_logo_digital_multi_light.png')" />
+        </a>
+        <span class="homebuttonText" v-if="subtitle" style="display: none;">{{ subtitle.toUpperCase() }}</span>
+        <div class="main-nav desktop">
+          <ul class="main-nav-first-half">
+            <li v-if="authObject && authObject.isCandidate"><a href="/candidate-assessment">View Assessment</a></li>
+            <li v-else><a href="/challenges">Challenge Library</a></li>
+            <li class="menu-item-with-extension" v-if="!authObject || (authObject && (!authObject.isCandidate && !authObject.isAdmin))">
+              <a href="/developers#courses">Starter Courses
+                <img :src="imageSrc('arrow-down%403x.png')" style="width:8px;" />
+              </a>
+              <div class="menu-item-extension" style="width: 315px;">
+                <div class="menu-item-extension-inner">
+                  <ul class="submenu">
+                    <li><a href="/starter-course/algorithms-and-data-structures">Learn Algorithms in One Week</a></li>
+                    <li><a href="/starter-course/learn-javascript-in-one-week">Learn JavaScript in One Week</a></li>
+                    <li><a href="/starter-course/learn-python-in-one-week">Learn Python in One Week</a></li>
+                    <li><a href="/starter-course/learn-ruby-in-one-week">Learn Ruby in One Week</a></li>
+                  </ul>
+                  <div class="btn btn-gradient" @click="window.location.href='/#courses'">View All <img :src="imageSrc('path_2.png')" /></div>
+                </div>
+              </div>
+            </li>
+            <li class="menu-item-with-extension" v-if="!authObject || (authObject && (!authObject.isCandidate && !authObject.isAdmin))">
+              <a href="/developers#interviewKits">Interview Kits 
+                <img :src="imageSrc('arrow-down%403x.png')" style="width:8px;" />
+                <span class="newIconChal" style="display: none;">NEW</span>
+              </a>
+              <div class="menu-item-extension" style="width: 315px;">
+                <div class="menu-item-extension-inner">
+                  <ul class="submenu">
+                    <li><a href="/interview-kit/algorithms">Algorithms & Data Structures</a></li>
+                    <li><a href="/interview-kit/google">Google Interview Prep</a></li>
+                    <li><a href="/interview-kit/react">React Interview Prep</a></li>
+                  </ul>
+                  <div class="btn btn-gradient" @click="window.location.href='/#interviewKits'">View All <img :src="imageSrc('path_2.png')" /></div>
+                </div>
+              </div>
+            </li>
+            <li v-if="!authObject || (authObject && (!authObject.isCandidate && !authObject.isAdmin))"><a href="/developers#career">Career Resources</a></li>
+          </ul>
+          <ul class="main-nav-second-half">
+            <template v-if="!loggedIn">
+              <li v-if="window.location.pathname !== '/member'"><a href="/member" class="pricing-link"><img :src="imageSrc('path%403x.png')" /> Upgrade</a></li>
+              <li><a href="/sl" class="login-link">Register / Login</a></li>
+            </template>
+            <template v-else>
+              <li v-if="authObject && !authObject.isCandidate && !authObject.isAdmin && !authObject.isMember && window.location.pathname !== '/member'"><a href="/member" class="pricing-link"><img :src="imageSrc('path%403x.png')" /> Upgrade</a></li>
+              <li v-bind:class="{
+                'menu-item-with-extension': true,
+                'hide-profile-nav': authObject.isCandidate && !authObject.isAdmin
+              }">
+                <a href="/profile" class="manage-link">My Profile <img class="logged-avatar" :src="authObject.profileImage" /></a>
+                <div class="menu-item-extension right" style="width: 250px;">
+                  <div class="menu-item-extension-inner">
+                    <ul class="submenu">
+                      <li v-if="authObject && authObject.isAdmin"><a href="/organizations?redirDashboard=true">Dashboard</a></li>
+                      <li v-if="authObject && !authObject.isAdmin && !authObject.isCandidate && authObject.isMember"><a href="/settings">Membership</a></li>
+                      <li><a href="/settings">Settings</a></li>
+                      <li><a href="/logout">Logout</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </div>
+        <div class="icon" id="mobile-nav-icon" @click="triggerMobileNav"><img :src="imageSrc('icons8-menu-48.png')" /></div>
+      </nav>
+
+      <div class="mobile-nav">
+        <div class="mobile-menu-wrapper" :class="{'shown': showMobileNav}" style="visibility: hidden;" @touchstart="startMobileDrag" @touchmove="midMobileDrag" @touchend="endMobileDrag" @touchcancel="cancelMobileDrag">
+          <div class="close-mobile-menu" @click="showMobileNav = false">&times;</div>
+          <ul class="main-nav-first-half">
+            <li><a href="/challenges">Challenge Library</a></li>
+          </ul>
+          <ul class="main-nav-second-half">
+            <li><a href="/member" class="pricing-link"><img :src="imageSrc('path.png')" /> Pricing</a></li>
+            <li><a href="/sl" class="login-link">Register / Login</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mobile-menu-underlay" :class="{'shown': showMobileNav}" style="display: none;" @click="showMobileNav = false"></div>
+    </div>`})})

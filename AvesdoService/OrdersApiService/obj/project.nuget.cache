@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PvsKKC3lDHSMJadR6wuFqymUEPK8UUnU84az8d2WI6t3+WgsMjJWMFS8QqaZ0pg+tlq2nv8vjGFXLWbF4CeIcg==",
+  "dgSpecHash": "Ld911UEbqo8gf4yZGTBpaE8gmrc2ZlEE+Odj1XWhqLuebpijHwiASL7ciTPg4CU5Um+XIJDtjSct2HKThmYAHw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\OrdersApiService\\ApiOrderService.csproj",
+  "projectFilePath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\OrdersApiService\\ApiOrderService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Paulyglot\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\Paulyglot\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",

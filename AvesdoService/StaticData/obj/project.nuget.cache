@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MfBUWvMvFz4hLPTNjmegHxweZGmrcd8jOPBxV67kRESAm/lN7VSAHuHvy4f7b4LCSTXNk6VlpnziB1vQOZ1E9Q==",
+  "dgSpecHash": "QOeooTg243YX9EKf1yjlPsHnRblCCk5cTvYgYIh75vqTnlGuo9BJJJ6w9SnNY7w7pCAOEvPiAGJNwm7/ousPFQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\StaticData\\StaticData.csproj",
+  "projectFilePath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\StaticData\\StaticData.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Paulyglot\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.3\\microsoft.entityframeworkcore.abstractions.6.0.3.nupkg.sha512",
     "C:\\Users\\Paulyglot\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"

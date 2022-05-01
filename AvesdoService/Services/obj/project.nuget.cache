@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "R/3r0a9dZ8TnyTJ+pUDpcORF9K9qdzZ/PR05qgajj27RqevUC/myK+QKNi0LTdZK3v4BGWyBpG2GpwepSXdRLw==",
+  "dgSpecHash": "yH4f9Pr9azUZcHMvwSWXQTp9YCV+pHbWH0CwerUvD2KiqKVeoAvo3z/FLNaQ+1EywnSN8jUyqPxai8hI6yXQRQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\Services\\Services.csproj",
+  "projectFilePath": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\Services\\Services.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Paulyglot\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\Paulyglot\\.nuget\\packages\\microsoft.aspnetcore.hosting.abstractions\\2.2.0\\microsoft.aspnetcore.hosting.abstractions.2.2.0.nupkg.sha512",
