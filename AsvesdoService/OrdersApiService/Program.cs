@@ -25,6 +25,7 @@ builder.Services.AddJsonConfigurations();
 builder.Services.AddSwaggerGenConfiguration();
 //Services Configurations
 builder.Services.AddServicesConfigurations();
+builder.Services.AddMessageQueueServicesConfigurations();
 //Jwt Configurations 
 builder.Services.AddJwtConfiguration();
 #endregion

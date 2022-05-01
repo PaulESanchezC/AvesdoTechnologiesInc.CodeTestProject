@@ -652,7 +652,8 @@
           "Microsoft.AspNetCore.Hosting.Abstractions": "2.2.0",
           "Microsoft.Extensions.Options": "6.0.0",
           "Models": "1.0.0",
-          "RabbitMQ.Client": "6.2.4"
+          "RabbitMQ.Client": "6.2.4",
+          "StaticData": "1.0.0"
         },
         "runtime": {
           "Services.dll": {}

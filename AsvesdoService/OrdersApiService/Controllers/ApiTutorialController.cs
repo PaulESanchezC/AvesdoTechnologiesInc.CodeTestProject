@@ -60,10 +60,6 @@ namespace ApiOrderService.Controllers
             return Ok(token);
         }
 
-        [HttpGet("GetTheJoke")]
-        public async Task<IActionResult> GetRandomJoke()
-        {
-            return Ok("knock knock, who's there: Theresa, Theresa who. Theresa fly to my plate");
-        }
+        
     }
 }
