@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models.TutorialModels;
-using Services.Repository.OrderRepository;
 using Services.TutorialServices;
 
 namespace ApiOrderService.Controllers
@@ -116,7 +114,8 @@ namespace ApiOrderService.Controllers
             
             'Other:'
             Solid design principles (although, for something this size, YAGNI, KISS and very hard to break)
-            Data Annotations
+            Data Annotations [models attributes]
+            Ef core fluent apis [On Order Delete: Cascading Behaviors]
             Code First,
             Custom validations,
             Defensive coding

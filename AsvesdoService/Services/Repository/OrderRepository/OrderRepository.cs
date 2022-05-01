@@ -28,9 +28,13 @@ public class OrderRepository : Repository<Order, OrderDto, OrderCreateDto, Order
         if (order is null)
             return await ResponseSingleBuilderTask(false, 404, "Empty Result", "There seems to be no order by the orderId provided", null);
 
-        var lastStatus = order.OrderStatuses.OrderBy(by => by.StatusDate).FirstOrDefault();
-        if (lastStatus.Status == OrderStatusTypes.Delivered || lastStatus.Status == OrderStatusTypes.Canceled)
-            return await ResponseSingleBuilderTask(false, 404, "Invalid Operation", $"The order status is final: order status '{lastStatus.Status}' cannot be changed ", null);
+        if (!isNewOrder)
+        {
+            var lastStatus = order.OrderStatuses.OrderBy(by => by.StatusDate).FirstOrDefault().Status;
+            if (lastStatus! == OrderStatusTypes.Delivered || lastStatus == OrderStatusTypes.Canceled)
+                return await ResponseSingleBuilderTask(false, 404, "Invalid Operation",
+                    $"The order status is final: order status '{lastStatus}' cannot be changed ", null);
+        }
 
         var orderStatusToCreate = new OrderStatus
         {

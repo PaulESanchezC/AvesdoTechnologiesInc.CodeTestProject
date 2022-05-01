@@ -155,7 +155,7 @@ public class OrderController : ControllerBase
         return Ok(PaymentMethodsTypes.PaymentMethodsList);
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpPost("MakeAnOrder")]
     public async Task<IActionResult> MakeAnOrder([FromBody] OrderCreateDto orderToCreate, CancellationToken cancellationToken)
     {

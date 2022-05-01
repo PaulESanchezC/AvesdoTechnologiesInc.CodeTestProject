@@ -13,7 +13,6 @@ C:\Users\Paulyglot\Desktop\Programing\Interview\AvesdoTechnologiesInc.CodeTestPr
 C:\Users\Paulyglot\Desktop\Programing\Interview\AvesdoTechnologiesInc.CodeTestProject\AsvesdoService\ApiOrderServiceTests\bin\Debug\net6.0\testhost.dll
 C:\Users\Paulyglot\Desktop\Programing\Interview\AvesdoTechnologiesInc.CodeTestProject\AsvesdoService\ApiOrderServiceTests\bin\Debug\net6.0\ApiOrderService.deps.json
 C:\Users\Paulyglot\Desktop\Programing\Interview\AvesdoTechnologiesInc.CodeTestProject\AsvesdoService\ApiOrderServiceTests\bin\Debug\net6.0\ApiOrderService.runtimeconfig.json
-C:\Users\Paulyglot\Desktop\Programing\Interview\AvesdoTechnologiesInc.CodeTestProject\AsvesdoService\ApiOrderServiceTests\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\Paulyglot\Desktop\Programing\Interview\AvesdoTechnologiesInc.CodeTestProject\AsvesdoService\ApiOrderServiceTests\bin\Debug\net6.0\appsettings.json
 C:\Users\Paulyglot\Desktop\Programing\Interview\AvesdoTechnologiesInc.CodeTestProject\AsvesdoService\ApiOrderServiceTests\bin\Debug\net6.0\ApiOrderService.exe
 C:\Users\Paulyglot\Desktop\Programing\Interview\AvesdoTechnologiesInc.CodeTestProject\AsvesdoService\ApiOrderServiceTests\bin\Debug\net6.0\testhost.exe

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Data.ModelBuilderConfigurations;
+using Microsoft.EntityFrameworkCore;
 using Models.CustomerModels;
 using Models.EmploymentRoleModels;
 using Models.OrderItemModels;
@@ -27,4 +28,10 @@ public class ApplicationDbContext : DbContext
     public DbSet<Staff> Staff { get; set; }
     public DbSet<Store> Stores { get; set; }
     public DbSet<Tax> Tax { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.AddOnOrderDeleteBehavior();
+    }
 }
