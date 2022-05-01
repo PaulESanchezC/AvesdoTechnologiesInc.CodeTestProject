@@ -22,7 +22,7 @@ namespace Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Models.CustomerModels.CustomerBase", b =>
+            modelBuilder.Entity("Models.CustomerModels.Customer", b =>
                 {
                     b.Property<string>("CustomerId")
                         .HasColumnType("nvarchar(450)");
@@ -57,8 +57,10 @@ namespace Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("CustomerPreferredPronounPreferredPronounId")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerPreferredPronoun")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("CustomerStateOrProvince")
                         .IsRequired()
@@ -78,12 +80,10 @@ namespace Data.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.HasIndex("CustomerPreferredPronounPreferredPronounId");
-
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Models.EmploymentRoleModels.EmploymentRoleBase", b =>
+            modelBuilder.Entity("Models.EmploymentRoleModels.EmploymentRole", b =>
                 {
                     b.Property<int>("EmploymentRoleId")
                         .ValueGeneratedOnAdd()
@@ -112,12 +112,12 @@ namespace Data.Migrations
                     b.ToTable("EmploymentRoles");
                 });
 
-            modelBuilder.Entity("Models.OrderItemModels.OrderItemBase", b =>
+            modelBuilder.Entity("Models.OrderItemModels.OrderItem", b =>
                 {
-                    b.Property<string>("OrderId")
+                    b.Property<string>("OrderItemId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("OrderBaseOrderId")
+                    b.Property<string>("OrderId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProductId")
@@ -127,16 +127,16 @@ namespace Data.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("OrderId");
+                    b.HasKey("OrderItemId");
 
-                    b.HasIndex("OrderBaseOrderId");
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("Models.OrderModels.OrderBase", b =>
+            modelBuilder.Entity("Models.OrderModels.Order", b =>
                 {
                     b.Property<string>("OrderId")
                         .HasColumnType("nvarchar(450)");
@@ -148,84 +148,46 @@ namespace Data.Migrations
                     b.Property<DateTime>("OrderDateAndTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("OrderStatusId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderTypeId")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("StoreId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<double>("TotalAmount")
+                        .HasColumnType("float");
+
                     b.HasKey("OrderId");
 
                     b.HasIndex("CustomerId");
-
-                    b.HasIndex("OrderStatusId");
-
-                    b.HasIndex("OrderTypeId");
 
                     b.HasIndex("StoreId");
 
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Models.OrderStatusModels.OrderStatusBase", b =>
+            modelBuilder.Entity("Models.OrderStatusesModels.OrderStatus", b =>
                 {
-                    b.Property<int>("OrderStatusId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("OrderStatusId")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderStatusId"), 1L, 1);
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeprecated")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("StatusDescription")
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("StatusDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("OrderStatusId");
 
                     b.ToTable("OrderStatuses");
                 });
 
-            modelBuilder.Entity("Models.OrderTypeModels.OrderTypeBase", b =>
-                {
-                    b.Property<int>("OrderTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderTypeId"), 1L, 1);
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeprecated")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("OrderTypeDefinition")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("OrderTypeId");
-
-                    b.ToTable("OrderTypes");
-                });
-
-            modelBuilder.Entity("Models.PaymentModels.PaymentBase", b =>
+            modelBuilder.Entity("Models.PaymentModels.Payment", b =>
                 {
                     b.Property<string>("PaymentId")
                         .HasColumnType("nvarchar(450)");
@@ -235,7 +197,6 @@ namespace Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("OrderId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("PaymentDate")
@@ -249,6 +210,12 @@ namespace Data.Migrations
                     b.Property<string>("StoreId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("SubTotal")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TaxesAmount")
+                        .HasColumnType("float");
 
                     b.Property<double>("TotalAmount")
                         .HasColumnType("float");
@@ -264,28 +231,7 @@ namespace Data.Migrations
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("Models.PreferredPronounsModels.PreferredPronounBase", b =>
-                {
-                    b.Property<int>("PreferredPronounId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PreferredPronounId"), 1L, 1);
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Pronouns")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("PreferredPronounId");
-
-                    b.ToTable("PreferredPronouns");
-                });
-
-            modelBuilder.Entity("Models.ProductModels.ProductBase", b =>
+            modelBuilder.Entity("Models.ProductModels.Product", b =>
                 {
                     b.Property<string>("ProductId")
                         .HasColumnType("nvarchar(450)");
@@ -314,7 +260,7 @@ namespace Data.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Models.StaffModels.StaffBase", b =>
+            modelBuilder.Entity("Models.StaffModels.Staff", b =>
                 {
                     b.Property<string>("StaffId")
                         .HasColumnType("nvarchar(450)");
@@ -358,8 +304,10 @@ namespace Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("StaffPreferredPronounPreferredPronounId")
-                        .HasColumnType("int");
+                    b.Property<string>("StaffPreferredPronoun")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("StaffStateOrProvince")
                         .IsRequired()
@@ -379,14 +327,12 @@ namespace Data.Migrations
 
                     b.HasIndex("EmploymentRoleId");
 
-                    b.HasIndex("StaffPreferredPronounPreferredPronounId");
-
                     b.HasIndex("StoreId");
 
                     b.ToTable("Staff");
                 });
 
-            modelBuilder.Entity("Models.StoreModels.StoreBase", b =>
+            modelBuilder.Entity("Models.StoreModels.Store", b =>
                 {
                     b.Property<string>("StoreId")
                         .HasColumnType("nvarchar(450)");
@@ -442,7 +388,7 @@ namespace Data.Migrations
                     b.ToTable("Stores");
                 });
 
-            modelBuilder.Entity("Models.TaxModels.TaxBase", b =>
+            modelBuilder.Entity("Models.TaxModels.Tax", b =>
                 {
                     b.Property<int>("TaxId")
                         .ValueGeneratedOnAdd()
@@ -455,12 +401,6 @@ namespace Data.Migrations
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
-
-                    b.Property<string>("PaymentBasePaymentId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("StoreBaseStoreId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("TaxAcronym")
                         .IsRequired()
@@ -482,31 +422,46 @@ namespace Data.Migrations
 
                     b.HasKey("TaxId");
 
-                    b.HasIndex("PaymentBasePaymentId");
-
-                    b.HasIndex("StoreBaseStoreId");
-
                     b.ToTable("Tax");
                 });
 
-            modelBuilder.Entity("Models.CustomerModels.CustomerBase", b =>
+            modelBuilder.Entity("OrderOrderStatus", b =>
                 {
-                    b.HasOne("Models.PreferredPronounsModels.PreferredPronounBase", "CustomerPreferredPronoun")
-                        .WithMany()
-                        .HasForeignKey("CustomerPreferredPronounPreferredPronounId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<string>("OrderStatusesOrderStatusId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Navigation("CustomerPreferredPronoun");
+                    b.Property<string>("OrdersOrderId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("OrderStatusesOrderStatusId", "OrdersOrderId");
+
+                    b.HasIndex("OrdersOrderId");
+
+                    b.ToTable("OrderOrderStatus");
                 });
 
-            modelBuilder.Entity("Models.OrderItemModels.OrderItemBase", b =>
+            modelBuilder.Entity("StoreTax", b =>
                 {
-                    b.HasOne("Models.OrderModels.OrderBase", null)
-                        .WithMany("OrderItems")
-                        .HasForeignKey("OrderBaseOrderId");
+                    b.Property<string>("StoresStoreId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasOne("Models.ProductModels.ProductBase", "Product")
+                    b.Property<int>("TaxId")
+                        .HasColumnType("int");
+
+                    b.HasKey("StoresStoreId", "TaxId");
+
+                    b.HasIndex("TaxId");
+
+                    b.ToTable("StoreTax");
+                });
+
+            modelBuilder.Entity("Models.OrderItemModels.OrderItem", b =>
+                {
+                    b.HasOne("Models.OrderModels.Order", null)
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("Models.ProductModels.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -515,27 +470,15 @@ namespace Data.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Models.OrderModels.OrderBase", b =>
+            modelBuilder.Entity("Models.OrderModels.Order", b =>
                 {
-                    b.HasOne("Models.CustomerModels.CustomerBase", "Customer")
+                    b.HasOne("Models.CustomerModels.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Models.OrderStatusModels.OrderStatusBase", "OrderStatus")
-                        .WithMany()
-                        .HasForeignKey("OrderStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.OrderTypeModels.OrderTypeBase", "OrderType")
-                        .WithMany()
-                        .HasForeignKey("OrderTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.StoreModels.StoreBase", "Store")
+                    b.HasOne("Models.StoreModels.Store", "Store")
                         .WithMany()
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -543,28 +486,22 @@ namespace Data.Migrations
 
                     b.Navigation("Customer");
 
-                    b.Navigation("OrderStatus");
-
-                    b.Navigation("OrderType");
-
                     b.Navigation("Store");
                 });
 
-            modelBuilder.Entity("Models.PaymentModels.PaymentBase", b =>
+            modelBuilder.Entity("Models.PaymentModels.Payment", b =>
                 {
-                    b.HasOne("Models.CustomerModels.CustomerBase", "Customer")
+                    b.HasOne("Models.CustomerModels.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Models.OrderModels.OrderBase", "Order")
+                    b.HasOne("Models.OrderModels.Order", null)
                         .WithMany("Payments")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .HasForeignKey("OrderId");
 
-                    b.HasOne("Models.StoreModels.StoreBase", "Store")
+                    b.HasOne("Models.StoreModels.Store", "Store")
                         .WithMany()
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -572,26 +509,18 @@ namespace Data.Migrations
 
                     b.Navigation("Customer");
 
-                    b.Navigation("Order");
-
                     b.Navigation("Store");
                 });
 
-            modelBuilder.Entity("Models.StaffModels.StaffBase", b =>
+            modelBuilder.Entity("Models.StaffModels.Staff", b =>
                 {
-                    b.HasOne("Models.EmploymentRoleModels.EmploymentRoleBase", "EmploymentRole")
+                    b.HasOne("Models.EmploymentRoleModels.EmploymentRole", "EmploymentRole")
                         .WithMany()
                         .HasForeignKey("EmploymentRoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Models.PreferredPronounsModels.PreferredPronounBase", "StaffPreferredPronoun")
-                        .WithMany()
-                        .HasForeignKey("StaffPreferredPronounPreferredPronounId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.StoreModels.StoreBase", "Store")
+                    b.HasOne("Models.StoreModels.Store", "Store")
                         .WithMany("StaffList")
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -599,39 +528,49 @@ namespace Data.Migrations
 
                     b.Navigation("EmploymentRole");
 
-                    b.Navigation("StaffPreferredPronoun");
-
                     b.Navigation("Store");
                 });
 
-            modelBuilder.Entity("Models.TaxModels.TaxBase", b =>
+            modelBuilder.Entity("OrderOrderStatus", b =>
                 {
-                    b.HasOne("Models.PaymentModels.PaymentBase", null)
-                        .WithMany("Taxes")
-                        .HasForeignKey("PaymentBasePaymentId");
+                    b.HasOne("Models.OrderStatusesModels.OrderStatus", null)
+                        .WithMany()
+                        .HasForeignKey("OrderStatusesOrderStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Models.StoreModels.StoreBase", null)
-                        .WithMany("Tax")
-                        .HasForeignKey("StoreBaseStoreId");
+                    b.HasOne("Models.OrderModels.Order", null)
+                        .WithMany()
+                        .HasForeignKey("OrdersOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("Models.OrderModels.OrderBase", b =>
+            modelBuilder.Entity("StoreTax", b =>
+                {
+                    b.HasOne("Models.StoreModels.Store", null)
+                        .WithMany()
+                        .HasForeignKey("StoresStoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.TaxModels.Tax", null)
+                        .WithMany()
+                        .HasForeignKey("TaxId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Models.OrderModels.Order", b =>
                 {
                     b.Navigation("OrderItems");
 
                     b.Navigation("Payments");
                 });
 
-            modelBuilder.Entity("Models.PaymentModels.PaymentBase", b =>
-                {
-                    b.Navigation("Taxes");
-                });
-
-            modelBuilder.Entity("Models.StoreModels.StoreBase", b =>
+            modelBuilder.Entity("Models.StoreModels.Store", b =>
                 {
                     b.Navigation("StaffList");
-
-                    b.Navigation("Tax");
                 });
 #pragma warning restore 612, 618
         }

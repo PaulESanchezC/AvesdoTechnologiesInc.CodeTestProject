@@ -24,7 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="FluentApi\" />
+	  <Folder Include="Migrations\" />
 	</ItemGroup>
 
 </Project>

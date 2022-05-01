@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="TinyRepository\" />
     <Folder Include="Repository\OrderRepository\" />
   </ItemGroup>
 

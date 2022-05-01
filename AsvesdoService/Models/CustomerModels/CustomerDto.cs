@@ -1,4 +1,4 @@
-﻿using Models.PreferredPronounsModels;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Models.CustomerModels;
 
@@ -15,7 +15,7 @@ public class CustomerDto
     public string CustomerCity { get; set; }
     public string CustomerStateOrProvince { get; set; }
     public string CustomerZipCode { get; set; }
-    public PreferredPronounDto CustomerPreferredPronoun { get; set; }
+    public string CustomerPreferredPronoun { get; set; }
 
     #endregion
 }

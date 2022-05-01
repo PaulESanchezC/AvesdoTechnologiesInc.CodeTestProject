@@ -17,12 +17,46 @@ namespace ApiOrderService.Controllers
         [HttpGet("GetTheTutorialInformationGuide")]
         public async Task<IActionResult> GetTheTutorialInformationGuide()
         {
-            //TODO: Implement GetTheTutorialInformationGuide()
-            return Ok("To be implemented");
+            return Ok(@"
+                Hi, welcome to this tutorial.
+        These Tutorial Endpoints will provide you with most data required to allow you ease of use of this services.
+
+        First: this Restful Api does not have an authentication service handler, therefore i am willingly providing a forever valid JWT token
+            (it will only be required for verbs: Post, Put and Delete)
+        
+        How to Create Orders:
+            well, i give you 2 options, 
+                option 1 => I made an endpoint that can assist you in creating the Request Body for the Create Order Endpoint, it basically constructs a
+                 OrderCreateDto object for you, 
+                option 2 => you can simply edit the Json object in the body request scheme that the swaggerUi gives out of the box.
+        
+        RabbitMq:
+            I decided to add entities that do not have a Post, Put or Delete request handlers, that is where RabbitMq slides in, my assumption is,
+            
+                    This rest api service is one of many micro services distributed for a franchise (in this case, a pizzeria restaurant) 
+                    Therefore, entities like, Products, Tax, EmploymentRoles are handled through a message queue.
+            
+            I have made a Basic message consumer for the Products entity, where i pretend to be consuming from a queue that fires a Post/Put/Delete:PuttProductEvent.
+
+        Thank you for your time.
+");
         }
 
 
-        [HttpGet("GetRandomJoke")]
+        [HttpPost("OrderCreateDto:Helper/")]
+        public async Task<IActionResult> OrderCreateDtoHelper()
+        {
+            return Ok();
+        }
+
+        [HttpGet("JwtTokenProvider")]
+        public async Task<IActionResult> JwtTokenProvider()
+        {
+            var token = "Get Token from service";
+            return Ok(token);
+        }
+
+        [HttpGet("GetTheJoke")]
         public async Task<IActionResult> GetRandomJoke()
         {
             return Ok("knock knock, who's there: Theresa, Theresa who. Theresa fly to my plate");

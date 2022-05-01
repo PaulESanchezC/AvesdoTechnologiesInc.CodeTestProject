@@ -1,10 +1,13 @@
 ﻿using System.Globalization;
 using System.Web;
 using Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Models.EnumModels;
 using Models.OrderModels;
 using Models.ResponseModels;
-using Models.ResponseModels.ResponseTemplates;
+using Models.StoreModels;
 using Services.Repository.OrderRepository;
 
 namespace ApiOrderService.Controllers
@@ -13,20 +16,33 @@ namespace ApiOrderService.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        #region Dependencies, Constructor
         private readonly IOrderRepository _orderRepository;
         public OrderController(IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
         }
-        #endregion
-        
-        
-        /// <param name="storeId">Store Identifier</param>
-        /// <param name="cancellationToken"></param>
-        /// <response code="400"><mark>Bad Request</mark> : storeId is a required field .</response>
-        [ProducesResponseType(typeof(Response<OrderDto>),200)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+
+        [HttpGet("GetAllOrdersWithPagination/{pageSize:int}/{currentPage:int}")]
+        public async Task<IActionResult> GetAllOrdersWithPagination(int pageSize, int currentPage, CancellationToken cancellationToken)
+        {
+            if (pageSize<=0)
+            {
+                ModelState.AddModelError("pageSize","Invalid pageSize Value, pageSize must be > 0 (zero)");
+                return BadRequest(ModelState);
+            }
+            if (currentPage <= 0)
+            {
+                ModelState.AddModelError("currentPage", "Invalid currentPage Value, currentPage must be > 0 (zero)");
+                return BadRequest(ModelState);
+            }
+
+            var request = await _orderRepository.GetAllWithPagesAsync(pageSize, currentPage,null, orderBy => orderBy.OrderDateAndTime,cancellationToken,
+                include => include.OrderStatuses.OrderBy(status => status.StatusDate), include => include.Customer, include => include.Payments,
+                include => include.Store, include => include.OrderItems);
+            return StatusCode(request.StatusCode, request);
+        }
+
         [HttpGet("GetAllOrdersForStore/{storeId}")]
         public async Task<IActionResult> GetAllOrdersForStore(string storeId, CancellationToken cancellationToken)
         {
@@ -41,20 +57,12 @@ namespace ApiOrderService.Controllers
                 orderBy: order => order.OrderDateAndTime,
                 cancellationToken: cancellationToken,
                 //Entities EfCore Includes
-                include => include.OrderStatus, include => include.Customer, include => include.Payments,
-                include => include.OrderType, include => include.OrderItems);
+                include => include.OrderStatuses.OrderBy(status => status.StatusDate), include => include.Customer, include => include.Payments,
+                include => include.Store, include => include.OrderItems);
 
-            return StatusCode(request.StatusCode,request);
+            return StatusCode(request.StatusCode, request);
         }
 
-
-        /// <param name="storeId">Store Identifier</param>
-        /// <param name="dateRequest">Date requested, as text in format: <mark> MM-dd-yyyy </mark></param>
-        /// <param name="cancellationToken"></param>
-        /// <response code="400"><mark>Bad Request</mark> : storeId and dateRequest are required field .</response>
-        /// <response code="400"><mark>Bad Request</mark> :  dateRequest invalid date format.</response>
-        [ProducesResponseType(typeof(Response<OrderDto>), 200)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("FindAllOrdersForStoreByDate/{storeId}/{dateRequest}")]
         public async Task<IActionResult> FindAllOrdersForStoreByDate(string storeId, string dateRequest, CancellationToken cancellationToken)
         {
@@ -80,27 +88,15 @@ namespace ApiOrderService.Controllers
                 orderBy: order => order.OrderDateAndTime,
                 cancellationToken: cancellationToken,
                 //Entities EfCore Includes
-                include => include.OrderStatus, include => include.Customer, include => include.Payments,
-                include => include.OrderType, include => include.OrderItems);
+                include => include.OrderStatuses.OrderBy(status => status.StatusDate), include => include.Customer, include => include.Payments,
+                include => include.Store, include => include.OrderItems);
 
             return StatusCode(request.StatusCode, request);
         }
 
-
-        /// <param name="storeId">Store Identifier</param>
-        /// <param name="orderId">Order Identifier</param>
-        /// <param name="cancellationToken"></param>
-        /// <response code="400"><mark>Bad Request</mark> : storeId and orderId are required field .</response>
-        [ProducesResponseType(typeof(Response<OrderDto>), 200)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("GetSingleOrderForStore/{storeId}/{orderId}")]
-        public async Task<IActionResult> GetSingleOrdersForStore(string storeId, string orderId, CancellationToken cancellationToken)
+        [HttpGet("GetSingleOrder/{orderId}")]
+        public async Task<IActionResult> GetSingleOrdersForStore(string orderId, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrEmpty(storeId))
-            {
-                ModelState.AddModelError("storeId", "The storeId field is required.");
-                return BadRequest(ModelState);
-            }
             if (string.IsNullOrEmpty(orderId))
             {
                 ModelState.AddModelError("orderId", "The orderId field is required.");
@@ -108,31 +104,87 @@ namespace ApiOrderService.Controllers
             }
 
             var request = await _orderRepository.GetSingleByAsync(
-                predicate: order => order.StoreId == storeId &&
-                                    order.OrderId == orderId,
+                predicate: order => order.OrderId == orderId,
                 cancellationToken: cancellationToken,
                 //Entities EfCore Includes
-                include => include.OrderStatus, include => include.Customer, include => include.Payments,
-                include => include.OrderType, include => include.OrderItems);
+                include => include.OrderStatuses.OrderBy(status => status.StatusDate), include => include.Customer, include => include.Payments,
+                include => include.Store, include => include.OrderItems);
 
             return StatusCode(request.StatusCode, request);
         }
 
+        [HttpGet("GetAllOrdersForCustomer/{customerId}")]
+        public async Task<IActionResult> GetAllOrdersForCustomer(string customerId, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(customerId))
+            {
+                ModelState.AddModelError("customerId", "The customerId field is required.");
+                return BadRequest(ModelState);
+            }
 
-        /// <param name="orderToCreate"><mark>*required</mark> : Takes a type of OrderCreateDto serialized in the body </param>
-        /// <param name="cancellationToken"></param>
-        /// <response code="400"><mark>Bad Request</mark> : orderToCreate modelState invalid.</response>
-        [ProducesResponseType(typeof(Response<OrderDto>), 201)]
-        [ProducesResponseType(StatusCodes.Status409Conflict)]
+            var request = await _orderRepository.GetAllByAsync(
+                order => order.CustomerId == customerId,
+                orderBy => orderBy.OrderDateAndTime,
+                cancellationToken,
+                include => include.OrderItems, include => include.OrderStatuses, include => include.Payments);
+            return StatusCode(request.StatusCode, request);
+        }
+
+
+        [Authorize]
         [HttpPost("MakeAnOrder")]
         public async Task<IActionResult> MakeAnOrder([FromBody] OrderCreateDto orderToCreate, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
+                BadRequest(ModelState);
+
+            var (isModelValid, errorDictionary) = await _orderRepository.ValidateOrderTypeAndPaymentMethodModelStateTask(orderToCreate, cancellationToken);
+            if (!isModelValid)
+            {
+                foreach (var (key, value) in errorDictionary)
+                    ModelState.AddModelError(key,value);
                 return BadRequest(ModelState);
+            }
 
             var request = await _orderRepository.CreateAsync(orderToCreate, cancellationToken);
-            return StatusCode(request.StatusCode,request);
+            if (request.IsSuccessful)
+            {
+                request = await _orderRepository.SetOrderStatusAsync(request.ResponseObject!.FirstOrDefault()!.OrderId,
+                    OrderStatusTypes.Payed, cancellationToken);
+                if (request.IsSuccessful)
+                {
+                    return StatusCode(request.StatusCode, request);
+                }
+            }
+            return StatusCode(request.StatusCode, request);
         }
 
+        [Authorize]
+        [HttpPost("SetOrderStatus/{orderId}/{status}")]
+        public async Task<IActionResult> SetOrderStatusTo(string orderId, string status, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(orderId))
+            {
+                ModelState.AddModelError("orderId", "The orderId field is required.");
+                return BadRequest(ModelState);
+            }
+
+            if (string.IsNullOrEmpty(status))
+            {
+                ModelState.AddModelError("status","The status field is required.");
+                return BadRequest(ModelState);
+            }
+
+            var (isStatusValid, error) = await _orderRepository.ValidateOrderStatusTypeModelStateTask(status, cancellationToken);
+            if (!isStatusValid)
+            {
+                ModelState.AddModelError(error.Key, error.Value);
+                return BadRequest(ModelState);
+            }
+
+            var request = await _orderRepository.SetOrderStatusAsync(orderId, status, cancellationToken);
+            return StatusCode(request.StatusCode,request);
+
+        }
     }
 }

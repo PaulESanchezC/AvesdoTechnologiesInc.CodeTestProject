@@ -1,13 +1,10 @@
-﻿using Data.FluentApi;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Models.CustomerModels;
 using Models.EmploymentRoleModels;
 using Models.OrderItemModels;
 using Models.OrderModels;
-using Models.OrderStatusModels;
-using Models.OrderTypeModels;
+using Models.OrderStatusesModels;
 using Models.PaymentModels;
-using Models.PreferredPronounsModels;
 using Models.ProductModels;
 using Models.StaffModels;
 using Models.StoreModels;
@@ -20,22 +17,14 @@ public class ApplicationDbContext : DbContext
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     { }
 
-    public DbSet<CustomerBase> Customers { get; set; }
-    public DbSet<EmploymentRoleBase> EmploymentRoles { get; set; }
-    public DbSet<OrderItemBase> OrderItems { get; set; }
-    public DbSet<OrderBase> Orders { get; set; }
-    public DbSet<OrderStatusBase> OrderStatuses { get; set; }
-    public DbSet<OrderTypeBase> OrderTypes { get; set; }
-    public DbSet<PaymentBase> Payments { get; set; }
-    public DbSet<PreferredPronounBase> PreferredPronouns { get; set; }
-    public DbSet<ProductBase> Products { get; set; }
-    public DbSet<StaffBase> Staff { get; set; }
-    public DbSet<StoreBase> Stores { get; set; }
-    public DbSet<TaxBase> Tax { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfiguration(new PaymentFluentApi());
-    }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<EmploymentRole> EmploymentRoles { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderStatus> OrderStatuses { get; set; }
+    public DbSet<Payment> Payments { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Staff> Staff { get; set; }
+    public DbSet<Store> Stores { get; set; }
+    public DbSet<Tax> Tax { get; set; }
 }

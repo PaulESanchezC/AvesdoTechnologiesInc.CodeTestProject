@@ -895,7 +895,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "6.0.3"
+          "Microsoft.EntityFrameworkCore.Abstractions": "6.0.3",
+          "Newtonsoft.Json": "13.0.1"
         },
         "compile": {
           "bin/placeholder/Models.dll": {}
@@ -925,6 +926,9 @@
       "StaticData/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Models": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/StaticData.dll": {}
         },

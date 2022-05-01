@@ -6,7 +6,7 @@ public class StoreDto
 {
     #region Public Properties
 
-    public string StoreId { get; set; } = Guid.NewGuid().ToString();
+    public string StoreId { get; set; }
     public string StoreName { get; set; }
     public string StorePhoneNumber { get; set; }
     public string StoreEmail { get; set; }

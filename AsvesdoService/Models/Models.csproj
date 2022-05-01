@@ -7,18 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="CustomerModels\" />
-    <Folder Include="EmploymentRoleModels\" />
-    <Folder Include="TaxModels\" />
-    <Folder Include="StaffModels\" />
-    <Folder Include="ProductModels\" />
-    <Folder Include="OrderItemModels\" />
-    <Folder Include="PaymentModels\" />
-    <Folder Include="StoreModels\" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="6.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="6.0.3" />
+    <Folder Include="EnumModels\" />
   </ItemGroup>
 
 </Project>

@@ -4,8 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>AsvesdoService\Documentation\ApiDocumentation.xml</DocumentationFile>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <DocumentationFile></DocumentationFile>
+    <UserSecretsId>939e9593-a205-4251-abae-29f0d3b6efbc</UserSecretsId>
   </PropertyGroup>
 
 	<ItemGroup>

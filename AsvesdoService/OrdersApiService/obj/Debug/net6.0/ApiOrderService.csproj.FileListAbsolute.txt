@@ -77,4 +77,3 @@ C:\Users\Paulyglot\Desktop\Programing\Interview\AvesdoTechnologiesInc.CodeTestPr
 C:\Users\Paulyglot\Desktop\Programing\Interview\AvesdoTechnologiesInc.CodeTestProject\AsvesdoService\OrdersApiService\bin\Debug\net6.0\Services.dll
 C:\Users\Paulyglot\Desktop\Programing\Interview\AvesdoTechnologiesInc.CodeTestProject\AsvesdoService\OrdersApiService\bin\Debug\net6.0\Models.pdb
 C:\Users\Paulyglot\Desktop\Programing\Interview\AvesdoTechnologiesInc.CodeTestProject\AsvesdoService\OrdersApiService\bin\Debug\net6.0\Services.pdb
-C:\Users\Paulyglot\Desktop\Programing\Interview\AvesdoTechnologiesInc.CodeTestProject\AsvesdoService\OrdersApiService\bin\Debug\net6.0\ApiDocumentation.xml

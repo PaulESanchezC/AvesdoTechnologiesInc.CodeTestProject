@@ -1,9 +1,7 @@
-﻿using System.Text;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Models.Options;
 using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
 using Services.MessageQueueHandlerService;
 
 namespace Services.RabbitMqService;
