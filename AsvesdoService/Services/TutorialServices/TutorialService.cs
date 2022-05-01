@@ -76,4 +76,23 @@ public class TutorialService : ITutorialService
 
         return orderCreate;
     }
+
+    public Task<(bool, Dictionary<string, string>)> ValidateModelOrderCreateDtoHelper(OrderCreateDtoHelper model)
+    {
+        var isValid = true;
+        var errorDictionary = new Dictionary<string, string>();
+
+        if (model.customerId is "string" || string.IsNullOrEmpty(model.customerId))
+        {
+            isValid = false;
+            errorDictionary.Add("customerId","The customerId field is required.");
+        }
+        if (model.storeId is "string" || string.IsNullOrEmpty(model.storeId))
+        {
+            isValid = false;
+            errorDictionary.Add("storeId", "The storeId field is required.");
+        }
+
+        return Task.FromResult((isValid, errorDictionary));
+    }
 }

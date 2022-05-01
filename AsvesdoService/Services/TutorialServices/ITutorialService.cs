@@ -8,4 +8,5 @@ public interface ITutorialService
 {
     Task<string> ProvideJwtToken();
     Task<OrderCreateDto> GenerateOrderCreateDtoAsync(string storeId, string customerId, CancellationToken cancellationToken, params TutorialOrderCreateDto[] products);
+    Task<(bool, Dictionary<string,string>)> ValidateModelOrderCreateDtoHelper(OrderCreateDtoHelper model);
 }

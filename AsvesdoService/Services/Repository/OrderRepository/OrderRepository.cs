@@ -1,29 +1,37 @@
 ﻿using AutoMapper;
 using Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using Models.EnumModels;
-using Models.OrderItemModels;
+using Models.MessageQueueModels;
 using Models.OrderModels;
 using Models.OrderStatusesModels;
-using Models.PaymentModels;
 using Models.ResponseModels;
+using Services.RabbitMqService;
 
 namespace Services.Repository.OrderRepository;
 
 public class OrderRepository : Repository<Order, OrderDto, OrderCreateDto, OrderUpdateDto>, IOrderRepository
 {
     private readonly ApplicationDbContext _db;
-    
-    public OrderRepository(ApplicationDbContext db, IMapper mapper) : base(db, mapper)
+    private readonly IRabbitMqService _messageQueueService;
+    public OrderRepository(ApplicationDbContext db, IMapper mapper, IRabbitMqService messageQueueService) : base(db, mapper)
     {
         _db = db;
+        _messageQueueService = messageQueueService;
     }
 
-
-    public async Task<Response<OrderDto>> SetOrderStatusAsync(string orderId, string orderStatus, CancellationToken cancellationToken)
+    public async Task<Response<OrderDto>> SetOrderStatusAsync(string orderId, string orderStatus, bool isNewOrder, CancellationToken cancellationToken)
     {
-        var order = await _db.Orders.FirstOrDefaultAsync(order => order.OrderId == orderId, cancellationToken);
+        var order = await _db.Orders.Include(status => status.OrderStatuses)
+            .FirstOrDefaultAsync(order => order.OrderId == orderId, cancellationToken);
+
+        if (order is null)
+            return await ResponseSingleBuilderTask(false, 404, "Empty Result", "There seems to be no order by the orderId provided", null);
+
+        var lastStatus = order.OrderStatuses.OrderBy(by => by.StatusDate).FirstOrDefault();
+        if (lastStatus.Status == OrderStatusTypes.Delivered || lastStatus.Status == OrderStatusTypes.Canceled)
+            return await ResponseSingleBuilderTask(false, 404, "Invalid Operation", $"The order status is final: order status '{lastStatus.Status}' cannot be changed ", null);
+
         var orderStatusToCreate = new OrderStatus
         {
             Orders = new() { order! },
@@ -43,15 +51,11 @@ public class OrderRepository : Repository<Order, OrderDto, OrderCreateDto, Order
             return await ResponseSingleBuilderTask(false, 300, "Operation Incomplete", "The Order has been successfully created but no the server failed to set the order status, please do so manually!", order);
         }
 
-        order = await _db.Orders.Include(o => o.OrderStatuses.OrderBy(by => by.StatusDate))
-            .Include(o => o.Payments)
-            .Include(o => o.Customer)
-            .Include(o => o.Store)
-            .Include(o => o.Store.Tax)
-            .Include(o => o.OrderItems)
-            .FirstOrDefaultAsync(prop => prop.OrderId == orderId, cancellationToken);
-
-        return await ResponseSingleBuilderTask(true, 201, "Ok", "Ok", order); ;
+        var message = isNewOrder
+            ? new SalesQueueMessage { NewOrder = order }
+            : new SalesQueueMessage { OrderUpdated = order };
+        _messageQueueService.SendSalesQueueMessage(message);
+        return await ResponseSingleBuilderTask(true, 201, "Ok", "Ok", order);
     }
     public Task<(bool, Dictionary<string, string>)> ValidateOrderTypeAndPaymentMethodModelStateTask(OrderCreateDto orderCreateDto, CancellationToken cancellationToken)
     {

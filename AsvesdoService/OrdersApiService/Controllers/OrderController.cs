@@ -9,6 +9,7 @@ using Models.EnumModels;
 using Models.OrderModels;
 using Models.ResponseModels;
 using Models.StoreModels;
+using Newtonsoft.Json;
 using Services.Repository.OrderRepository;
 
 namespace ApiOrderService.Controllers;
@@ -23,6 +24,15 @@ public class OrderController : ControllerBase
         _orderRepository = orderRepository;
     }
 
+
+    [HttpGet("GetAllOrders")]
+    public async Task<IActionResult> GetAllOrders(CancellationToken cancellationToken)
+    {
+        var request = await _orderRepository.GetAllByAsync(null,null,cancellationToken,
+            include => include.Customer, include => include.Payments,
+            include => include.Store, include => include.OrderItems, include => include.OrderStatuses.OrderBy(status => status.StatusDate));
+        return StatusCode(request.StatusCode, request);
+    }
 
     [HttpGet("GetAllOrdersWithPagination/{pageSize:int}/{currentPage:int}")]
     public async Task<IActionResult> GetAllOrdersWithPagination(int pageSize, int currentPage, CancellationToken cancellationToken)
@@ -131,6 +141,19 @@ public class OrderController : ControllerBase
         return StatusCode(request.StatusCode, request);
     }
 
+    [HttpGet("GetAllOrderStatusTypes")]
+    public IActionResult GetAllOrderStatusTypes(CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        return Ok(OrderStatusTypes.OrderStatusTypesList);
+    }
+
+    [HttpGet("GetAllPaymentMethodTypes")]
+    public IActionResult GetAllPaymentMethodTypes(CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        return Ok(PaymentMethodsTypes.PaymentMethodsList);
+    }
 
     [Authorize]
     [HttpPost("MakeAnOrder")]
@@ -151,7 +174,7 @@ public class OrderController : ControllerBase
         if (request.IsSuccessful)
         {
             request = await _orderRepository.SetOrderStatusAsync(request.ResponseObject!.FirstOrDefault()!.OrderId,
-                OrderStatusTypes.Payed, cancellationToken);
+                OrderStatusTypes.Payed, true, cancellationToken);
             if (request.IsSuccessful)
             {
                 return StatusCode(request.StatusCode, request);
@@ -183,7 +206,7 @@ public class OrderController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var request = await _orderRepository.SetOrderStatusAsync(orderId, status, cancellationToken);
+        var request = await _orderRepository.SetOrderStatusAsync(orderId, status, false, cancellationToken);
         return StatusCode(request.StatusCode, request);
 
     }

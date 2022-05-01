@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Interfaces;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using StaticData;
+
 
 namespace Configurations.SwaggerGenConfigurations;
 
@@ -30,13 +30,13 @@ public static class SwaggerGenConfiguration
                         Email = "PaulESanchezC@outlook.com",
                     },
                 });
-            options.AddSecurityDefinition(JwtBearerOptions.AuthenticationScheme, new OpenApiSecurityScheme
+            options.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
             {
                 Description = @"Enter 'Bearer' [space] Token value",
                 Name = "Authorization",
                 In = ParameterLocation.Header,
                 Type = SecuritySchemeType.ApiKey,
-                Scheme = JwtBearerOptions.AuthenticationScheme
+                Scheme = JwtBearerDefaults.AuthenticationScheme
             });
             options.AddSecurityRequirement(
                 new OpenApiSecurityRequirement
@@ -47,10 +47,10 @@ public static class SwaggerGenConfiguration
                             Reference = new OpenApiReference
                             {
                                 Type = ReferenceType.SecurityScheme,
-                                Id = JwtBearerOptions.AuthenticationScheme
+                                Id = JwtBearerDefaults.AuthenticationScheme
                             },
                             Scheme = "auth 2",
-                            Name = JwtBearerOptions.AuthenticationScheme,
+                            Name = JwtBearerDefaults.AuthenticationScheme,
                             In = ParameterLocation.Header
                         },
                         new List<string>()

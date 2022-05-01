@@ -11,8 +11,10 @@ public static class JsonConfiguration
         services.AddControllers().AddJsonOptions(opt => opt.JsonSerializerOptions.PropertyNameCaseInsensitive = false)
             .AddNewtonsoftJson(options =>
             {
-                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.MaxDepth = 3;
+                options.SerializerSettings.DateFormatString = "MM-dd-yyyy";
             });
         return services;
     }

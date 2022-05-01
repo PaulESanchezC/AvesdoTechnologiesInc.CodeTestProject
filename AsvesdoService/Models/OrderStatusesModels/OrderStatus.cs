@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Models.EnumModels;
 using Models.OrderModels;
+using Newtonsoft.Json;
 
 namespace Models.OrderStatusesModels;
 
@@ -15,6 +15,7 @@ public class OrderStatus
     [Required(AllowEmptyStrings = false),MaxLength(100)]
     public string Status { get; set; }
 
+    [JsonIgnore]
     public List<Order> Orders { get; set; }
 
     public DateTime StatusDate { get; set; } = DateTime.Now;
