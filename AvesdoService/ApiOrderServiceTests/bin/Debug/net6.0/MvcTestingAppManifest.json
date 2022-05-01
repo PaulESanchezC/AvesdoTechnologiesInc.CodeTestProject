@@ -1,8 +1,8 @@
 {
-  "ApiOrderService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\OrdersApiService",
-  "Configurations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\Configurations",
-  "Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\Data",
-  "Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\Models",
-  "Services, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\Services",
-  "StaticData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AsvesdoService\\StaticData"
+  "ApiOrderService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\OrdersApiService",
+  "Configurations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\Configurations",
+  "Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\Data",
+  "Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\Models",
+  "Services, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\Services",
+  "StaticData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Paulyglot\\Desktop\\Programing\\Interview\\AvesdoTechnologiesInc.CodeTestProject\\AvesdoService\\StaticData"
 }

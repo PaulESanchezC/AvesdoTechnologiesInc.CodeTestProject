@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Linq.Expressions;
 using System.Web;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,14 +16,14 @@ public class OrderController : ControllerBase
     private readonly IOrderRepository _orderRepository;
     public OrderController(IOrderRepository orderRepository)
     {
-        _orderRepository = orderRepository;
+        _orderRepository=orderRepository;
     }
 
 
     [HttpGet("GetAllOrders")]
     public async Task<IActionResult> GetAllOrders(CancellationToken cancellationToken)
     {
-        var request = await _orderRepository.GetAllByAsync(null,null,cancellationToken,
+        var request = await _orderRepository.GetAllByAsync(null, null, cancellationToken,
             include => include.Customer, include => include.Payments,
             include => include.Store, include => include.OrderItems, include => include.OrderStatuses.OrderBy(status => status.StatusDate));
         return StatusCode(request.StatusCode, request);
@@ -31,12 +32,12 @@ public class OrderController : ControllerBase
     [HttpGet("GetAllOrdersWithPagination/{pageSize:int}/{currentPage:int}")]
     public async Task<IActionResult> GetAllOrdersWithPagination(int pageSize, int currentPage, CancellationToken cancellationToken)
     {
-        if (pageSize <= 0)
+        if (pageSize<=0)
         {
             ModelState.AddModelError("pageSize", "Invalid pageSize Value, pageSize must be > 0 (zero)");
             return BadRequest(ModelState);
         }
-        if (currentPage <= 0)
+        if (currentPage<=0)
         {
             ModelState.AddModelError("currentPage", "Invalid currentPage Value, currentPage must be > 0 (zero)");
             return BadRequest(ModelState);
@@ -58,7 +59,7 @@ public class OrderController : ControllerBase
         }
 
         var request = await _orderRepository.GetAllByAsync(
-            predicate: order => order.StoreId == storeId,
+            predicate: order => order.StoreId==storeId,
             orderBy: order => order.OrderDateAndTime,
             cancellationToken: cancellationToken,
             //Entities EfCore Includes
@@ -88,8 +89,8 @@ public class OrderController : ControllerBase
         }
 
         var request = await _orderRepository.GetAllByAsync(
-            predicate: order => order.StoreId == storeId &&
-                                order.OrderDateAndTime == dateOfRequestParsed,
+            predicate: order => order.StoreId==storeId&&
+                                order.OrderDateAndTime==dateOfRequestParsed,
             orderBy: order => order.OrderDateAndTime,
             cancellationToken: cancellationToken,
             //Entities EfCore Includes
@@ -109,7 +110,7 @@ public class OrderController : ControllerBase
         }
 
         var request = await _orderRepository.GetSingleByAsync(
-            predicate: order => order.OrderId == orderId,
+            predicate: order => order.OrderId==orderId,
             cancellationToken: cancellationToken,
             //Entities EfCore Includes
             include => include.OrderStatuses.OrderBy(status => status.StatusDate), include => include.Customer, include => include.Payments,
@@ -128,10 +129,13 @@ public class OrderController : ControllerBase
         }
 
         var request = await _orderRepository.GetAllByAsync(
-            order => order.CustomerId == customerId,
+            order => order.CustomerId==customerId,
             orderBy => orderBy.OrderDateAndTime,
             cancellationToken,
-            include => include.OrderItems, include => include.OrderStatuses, include => include.Payments);
+            include => include.OrderItems,
+            include => include.OrderStatuses,
+            include => include.Payments
+            );
         return StatusCode(request.StatusCode, request);
     }
 
@@ -156,7 +160,7 @@ public class OrderController : ControllerBase
         if (!ModelState.IsValid)
             BadRequest(ModelState);
 
-        var (isModelValid, errorDictionary) = await _orderRepository.ValidateOrderTypeAndPaymentMethodModelStateTask(orderToCreate, cancellationToken);
+        var (isModelValid, errorDictionary)=await _orderRepository.ValidateOrderTypeAndPaymentMethodModelStateTask(orderToCreate, cancellationToken);
         if (!isModelValid)
         {
             foreach (var (key, value) in errorDictionary)
@@ -167,7 +171,7 @@ public class OrderController : ControllerBase
         var request = await _orderRepository.CreateAsync(orderToCreate, cancellationToken);
         if (request.IsSuccessful)
         {
-            request = await _orderRepository.SetOrderStatusAsync(request.ResponseObject!.FirstOrDefault()!.OrderId,
+            request=await _orderRepository.SetOrderStatusAsync(request.ResponseObject!.FirstOrDefault()!.OrderId,
                 OrderStatusTypes.Payed, true, cancellationToken);
             if (request.IsSuccessful)
             {
@@ -193,7 +197,7 @@ public class OrderController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var (isStatusValid, error) = await _orderRepository.ValidateOrderStatusTypeModelStateTask(status, cancellationToken);
+        var (isStatusValid, error)=await _orderRepository.ValidateOrderStatusTypeModelStateTask(status, cancellationToken);
         if (!isStatusValid)
         {
             ModelState.AddModelError(error.Key, error.Value);
@@ -219,4 +223,3 @@ public class OrderController : ControllerBase
         return StatusCode(request.StatusCode, request);
     }
 }
-

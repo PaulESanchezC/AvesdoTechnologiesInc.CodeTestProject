@@ -1,9 +1,6 @@
 ﻿using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
 using ApiOrderService.Controllers;
-using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Models.OrderModels;
 using Models.ResponseModels;
 using Moq;

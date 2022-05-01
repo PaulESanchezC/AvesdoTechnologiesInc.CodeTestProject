@@ -48,6 +48,8 @@ namespace ApiOrderService.Controllers
             
             I have made a Basic message consumer for the Products entity, where i pretend to be consuming from a queue that fires a Post/Put/Delete:PuttProductEvent.
 
+        For mode information about the code, libraries, conventions, and practices use the GET:'CodeInformation' endpoint.
+        
         Thank you for your time.
         Developed by Paul E. Sanchez C.
         ");
@@ -116,16 +118,30 @@ namespace ApiOrderService.Controllers
             Solid design principles (although, for something this size, YAGNI, KISS and very hard to break)
             Data Annotations [models attributes]
             Ef core fluent apis [On Order Delete: Cascading Behaviors]
-            Code First,
-            Custom validations,
+            Code First
+            Custom validations
             Defensive coding
             SQL seeding the Database initial model data
             Response Model Pattern
             Repository Pattern (Generic),
             RabbitMq Message Queue Consumer.
+            C# Naming conventions: 
+                exception: 
+                            Named Arguments for method parameters, especially when using the Repository, example ahead:
+                            'Method parameter: with Named Argument'
+                            includes: new Expression<Func<Order, object>>[]
+                            {
+                                include => include.OrderItems,
+                                include => include.OrderStatuses,
+                                include => include.Payments
+                            });
+                            'Method parameter: without Named Argument'
+                                include => include.OrderItems,
+                                include => include.OrderStatuses,
+                                include => include.Payments
 
         Thank you for your time.
-        Developed by Paul E. Sanchez C.
+        'Developed by Paul E. Sanchez C.'
 ");
         }
     }
