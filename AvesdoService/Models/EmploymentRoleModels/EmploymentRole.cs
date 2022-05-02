@@ -19,6 +19,8 @@ public class EmploymentRole
 
     #region Internal Properties
     public DateTime DateCreated { get; set; } = DateTime.Now;
+
     public bool IsActive { get; set; } = true;
+
     #endregion
 }

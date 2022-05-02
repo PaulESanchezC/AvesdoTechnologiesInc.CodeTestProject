@@ -41,6 +41,7 @@ public class Customer
     #region Internal Properties
 
     public DateTime DateCreated { get; set; } = DateTime.Now;
+
     public bool IsActive { get; set; } = true;
 
     #endregion
